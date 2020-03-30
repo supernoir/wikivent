@@ -1,0 +1,43 @@
+[
+  {
+    "id": 0,
+    "type": "Intensiv care",
+    "make": "Dräger",
+    "model": "Evita V500",
+    "features": [
+      "Lung diagnostic tools",
+      "Variable PS, PPS, Smart Care 2.0",
+      "PEEP, EIP, VT, Cdyn",
+      "volumetric CO2-monitoring weaning parameters",
+      "Variable pressure support",
+      "Automatic tube compensation",
+      "Adaptable for Neonatal use",
+      "APRV",
+      "Low-FLow PV Loop"
+    ],
+    "link": "https: //www.draeger.com/en-us_us/Hospital/Products/Ventilation-and-Respiratory-Monitoring/ICU-Ventilation-and-Respiratory-Monitoring/Evita-Infinity-V500-ventilator"
+  },
+  {
+    "id": 1,
+    "type": "Intensiv care",
+    "make": "Dräger",
+    "model": "Evita V600",
+    "features": [
+      "18.3\" touch screen"
+    ],
+    "link": ""
+  },
+  {
+    "id": 1,
+    "type": "Intensiv care",
+    "make": "Dräger",
+    "model": "Evita V300",
+    "features": [
+      "Highly adaptable",
+      "PPS, Smart Care 2.0",
+      "Smart Pulmonary View",
+      "Automatic diagonsis function auto P0.1"
+    ],
+    "link": ""
+  }
+]
