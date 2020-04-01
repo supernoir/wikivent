@@ -1,9 +1,8 @@
 import React from 'react'
+import { StyledFooter } from './styles'
 
 export const Footer: React.FC = () => {
-  return (<footer>
-    <ul>
-      <li>&copy; Wikivent 2020</li>
-    </ul>
-  </footer>)
+  return (<StyledFooter>
+    <span>&copy; Wikivent 2020</span>
+  </StyledFooter>)
 }

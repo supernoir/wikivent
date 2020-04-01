@@ -1,5 +1,10 @@
 import styled from "styled-components"
 
+export const DataTableWrapper = styled.div`
+  max-height: 600px;
+  overflow-x: scroll;
+`
+
 export const Table = styled.table`
   background: snow;
   padding: 0;

@@ -16,7 +16,7 @@ export const menuitems: MenuItem[] = [
   {
     id: 2,
     target: "/form",
-    label: "Submissions"
+    label: "Submit ventilator"
   },
   {
     id: 3,
