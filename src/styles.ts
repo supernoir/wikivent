@@ -15,7 +15,7 @@ export const StyledApp = styled.div`
   padding: 0;
   width: 100vw;
   height: 100vh;
-  background: goldenrod;
+  background: linear-gradient(60deg, cadetblue, springgreen);
   display: flex;
   flex-direction: column;
   flex-wrap: nowrap;

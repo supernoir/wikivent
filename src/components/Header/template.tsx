@@ -1,9 +1,12 @@
 import React from 'react'
+import { Name, Highlight, Logo, StyledLogo, StyledHeader } from './styles'
+import { Navigation } from '../Navigation/template'
 
 export const Header: React.FC = () => {
   return (
-    <header>
-      <h1>{"WikiVent"}</h1>
-    </header>
+    <StyledHeader>
+      <Logo><StyledLogo /><Name>WIKI<Highlight>Vent</Highlight></Name></Logo>
+      <Navigation />
+    </StyledHeader>
   )
 }

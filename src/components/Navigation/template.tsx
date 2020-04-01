@@ -20,6 +20,11 @@ export const menuitems: MenuItem[] = [
   },
   {
     id: 3,
+    target: "/glossary",
+    label: "Glossary"
+  },
+  {
+    id: 4,
     target: "/about",
     label: "About the Project"
   },

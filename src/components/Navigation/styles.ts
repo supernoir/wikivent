@@ -20,13 +20,13 @@ export const StyledLink = styled(Link)`
   padding: 1em;
   text-decoration: none;
   background: snow;
-  color: lightseagreen;
+  color: black;
   border-radius: 8px;
   font-weight: bold;
   border: 2px solid snow;
 
   &:hover {
-    background: goldenrod;
+    background: transparent;
     color: snow;
   }
 `;
