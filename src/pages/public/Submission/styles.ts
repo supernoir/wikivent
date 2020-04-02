@@ -3,19 +3,19 @@ import styled from "styled-components"
 export const Form = styled.form`
   display: flex;
   flex-direction: column;
-  margin: 1em 0;
+  margin: 0;
 `
 
 export const FormComponent = styled.div`
   display:flex;
   flex-direction: column;
   flex-grow: 1;
-  margin: 1em 0;
+  margin: 0;
 `
 
 export const TextInput = styled.input`
   font-family: "Source Sans Pro", sans-serif;
-  padding: 1em;
+  padding: 0.5em;
   color: black;
   background: rgba(0,0,0,0.05);
   box-shadow: none;
@@ -32,7 +32,7 @@ export const TextInput = styled.input`
 
 export const TextArea = styled.textarea`
   font-family: "Source Sans Pro", sans-serif;
-  padding: 1em;
+  padding: 0.5em;
   color: black;
   background: rgba(0,0,0,0.05);
   box-shadow: none;
@@ -49,5 +49,5 @@ export const TextArea = styled.textarea`
 `
 
 export const Label = styled.label`
-  margin: 1em 0;
+  margin: 0.5em 0;
 `

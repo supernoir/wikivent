@@ -1,7 +1,7 @@
 import React from 'react'
 import { RouteComponentProps } from '@reach/router'
-import { Paper } from '../../components/Paper'
-import { Section } from '../../components/Section'
+import { Paper } from '../../../components/Paper'
+import { Section } from '../../../components/Section'
 
 interface ItemDetailPageProps extends RouteComponentProps {
   id?: string

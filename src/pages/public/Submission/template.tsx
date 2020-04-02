@@ -1,8 +1,8 @@
 import React, { useState } from 'react'
 import { RouteComponentProps } from '@reach/router'
-import { Paper } from '../../components/Paper/styles'
-import { Section } from '../../components/Section'
-import { Button } from '../../components/Button/style'
+import { Paper } from '../../../components/Paper/styles'
+import { Section } from '../../../components/Section'
+import { Button } from '../../../components/Button'
 import {
   Form,
   FormComponent,

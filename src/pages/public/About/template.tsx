@@ -1,8 +1,8 @@
 import React from 'react'
 import { RouteComponentProps } from '@reach/router'
 import { Paragraph } from './styles'
-import { Paper } from '../../components/Paper'
-import { Section } from '../../components/Section'
+import { Paper } from '../../../components/Paper'
+import { Section } from '../../../components/Section'
 
 interface AboutPageProps extends RouteComponentProps { }
 

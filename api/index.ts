@@ -4,6 +4,7 @@ const app = express()
 const port = 8081 || process.env.port
 const cors = require("cors")
 const rdb = require('rethinkdb')
+const apiVersion = 1;
 const config = {
 	host: '127.0.0.1',
 	port: 28015,
@@ -16,7 +17,8 @@ app.use(createConnection)
 
 app.get("/", (req, res) => {
 	res.json({
-		message: "hello"
+		message: "Welcome to the WIKIVENT api, please use the documentation to use the routes you need",
+		version: apiVersion
 	})
 })
 

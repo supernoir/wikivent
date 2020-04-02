@@ -7,8 +7,8 @@ import {
   Explanation,
   Description
 } from './styles'
-import { Paper } from '../../components/Paper'
-import { Section } from '../../components/Section'
+import { Paper } from '../../../components/Paper'
+import { Section } from '../../../components/Section'
 
 interface GlossaryPageProps extends RouteComponentProps { }
 
@@ -26,8 +26,6 @@ const glossary = [
     desc: "Ventilation that can be administered through non-invasive methods, e.g. a mask covering mouth and nostrils"
   },
 ]
-
-
 
 export const GlossaryPage: React.FC<GlossaryPageProps> = (props) => {
   return (<Paper>
