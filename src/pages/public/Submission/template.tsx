@@ -1,4 +1,5 @@
 import React, { useState } from 'react'
+import axios from "axios"
 import { RouteComponentProps } from '@reach/router'
 import { Paper } from '../../../components/Paper/styles'
 import { Section } from '../../../components/Section'
@@ -27,7 +28,9 @@ export const FormPage: React.FC<FormPageProps> = (props) => {
   const handleSubmit = (evt: React.MouseEvent) => {
     evt.preventDefault();
     if (Object.keys(form).length > 0) {
-      console.log(form)
+      axios.post(
+        `http://localhost:8081/submitted/new`, form
+      ).then(result => console.log(result));
     } else {
       console.error("Missing input")
     }

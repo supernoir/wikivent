@@ -21,6 +21,7 @@ export const App: React.FC = () => {
         <FormPage path="/form" />
         <GlossaryPage path="/glossary" />
         <AboutPage path="/about" />
+        <ItemDetailPage path="detail/:id" />
         {/** RESTRICTED ROUTES */}
         <ReviewPage path="/review" />
       </Router>

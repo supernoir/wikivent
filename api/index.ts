@@ -24,6 +24,8 @@ app.get("/", (req, res) => {
 
 // Routes
 app.route('/approved/get').get(get)
+app.route('/approved/get/:id').get(getById)
+app.route('/submitted/new').put(create);
 
 app.use(closeConnection)
 
@@ -39,6 +41,47 @@ function get(req, res, next) {
 		})
 		.error(handleError(res))
 		.finally(next)
+}
+
+function getById(req, res, next) {
+	if ((req) && (req.params != null)) {
+		const queryId = req.params.id
+		rdb
+			.table('approved')
+			.get(queryId)
+			.run(req._rdbConn)
+			.then((cursor) => {
+				console.log(cursor)
+				return cursor
+			})
+			.then((result) => {
+				console.log(result)
+				res.send(JSON.stringify(result))
+			})
+			.error(handleError(res))
+			.finally(next)
+	}
+	else {
+		handleError(res)(new Error("The todo must have a field `id`."));
+		next();
+	}
+}
+
+function create(req, res, next) {
+	const submission = req.body;
+	submission.createdAt = rdb.now();
+	rdb.table('submitted')
+		.insert(submission, { returnChanges: true })
+		.run(req._rdbConn)
+		.then(function (result) {
+			if (result.inserted !== 1) {
+				handleError(res)(new Error("Document was not inserted."));
+			}
+			else {
+				res.send(JSON.stringify(result.changes[0].new_val));
+			}
+		}).error(handleError(res))
+		.finally(next);
 }
 
 function handleError(res) {

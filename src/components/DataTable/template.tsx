@@ -14,6 +14,7 @@ import {
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faExternalLinkAlt } from '@fortawesome/free-solid-svg-icons'
 import { Loader } from '../Loader/template'
+import { Link } from '@reach/router'
 
 const tablehead = [
   "Type",
@@ -45,7 +46,7 @@ export const DataTable: React.FC<DataTableInterface> = ({ data, isLoading }) => 
                 return <tr key={item.id}>
                   <TableCell>{item.type}</TableCell>
                   <TableCell>{item.make}</TableCell>
-                  <TableCell>{item.model}</TableCell>
+                  <TableCell><Link to={`/detail/${item.id}`}>{item.model}</Link></TableCell>
                   <TableCell>
                     <FeatureList>{item.features.map((feature: any) => <FeatureListItem key={feature}>{feature}</FeatureListItem>)}</FeatureList>
                   </TableCell>
