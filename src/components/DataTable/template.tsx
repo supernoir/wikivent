@@ -7,14 +7,12 @@ import {
   TableCell,
   FeatureList,
   FeatureListItem,
-  ExternalLink,
   DataTableWrapper
 } from './styles'
 
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faExternalLinkAlt } from '@fortawesome/free-solid-svg-icons'
 import { Loader } from '../Loader/template'
 import { Link } from '@reach/router'
+import { ExtLink } from '../ExtLink'
 
 const tablehead = [
   "Type",
@@ -51,7 +49,7 @@ export const DataTable: React.FC<DataTableInterface> = ({ data, isLoading }) => 
                     <FeatureList>{item.features.map((feature: any) => <FeatureListItem key={feature}>{feature}</FeatureListItem>)}</FeatureList>
                   </TableCell>
                   <TableCell>
-                    <ExternalLink href={item.link}><FontAwesomeIcon icon={faExternalLinkAlt} /> {"Product page"}</ExternalLink>
+                    <ExtLink link={item.link} label={"Product page"} />
                   </TableCell>
                 </tr>
               })}

@@ -1,0 +1,1 @@
+export { ExtLink } from "./template"

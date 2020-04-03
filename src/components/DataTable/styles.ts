@@ -46,12 +46,3 @@ export const FeatureList = styled.ul`
 
 export const FeatureListItem = styled.li`
 `
-export const ExternalLink = styled.a`
-  color: cadetblue;
-  text-decoration: none;
-  cursor: pointer;
-
-  &:hover {
-    color: black;
-  }
-`

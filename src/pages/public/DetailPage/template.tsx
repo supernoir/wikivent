@@ -1,8 +1,10 @@
 import React, { useEffect, useState } from 'react'
-import { RouteComponentProps } from '@reach/router'
+import { RouteComponentProps, Link } from '@reach/router'
 import { Paper } from '../../../components/Paper'
 import { Section } from '../../../components/Section'
 import axios from "axios"
+import { ExtLink } from '../../../components/ExtLink'
+import { Model, Segment, Make, Head, BackLink, FeatureList, FeatureListItem } from './styles'
 
 interface ItemDetailPageProps extends RouteComponentProps {
   id?: string
@@ -24,21 +26,28 @@ export const ItemDetailPage: React.FC<ItemDetailPageProps> = ({ id }) => {
     setData(newData)
   }
 
-
-
   return (<Paper>
     <Section>
+      <Segment>
+        <BackLink to={"/"}>{"Back to Overview"}</BackLink>
+      </Segment>
       {data && data.map((detail: any) => {
-        return (
-          <div>
-            <h1>{detail.make}</h1>
-            <h2>{detail.model}</h2>
-            <ul>
+        return (<>
+          <Segment>
+            <Head>
+              <Make>{detail.make}</Make>
+              <Model>{detail.model}</Model>
+            </Head>
+            <FeatureList>
               {detail.features && detail.features.map((feature: any) => {
-                return <li>{feature}</li>
+                return <FeatureListItem>{feature}</FeatureListItem>
               })}
-            </ul>
-          </div>
+            </FeatureList>
+          </Segment>
+          <Segment>
+            <ExtLink link={detail.link} label={"Product page"} />
+          </Segment>
+        </>
         )
       })}
     </Section>
