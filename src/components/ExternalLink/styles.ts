@@ -1,6 +1,6 @@
 import styled from "styled-components"
 
-export const ExternalLink = styled.a`
+export const Anchor = styled.a`
   color: cadetblue;
   text-decoration: none;
   cursor: pointer;

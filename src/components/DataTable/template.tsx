@@ -12,7 +12,7 @@ import {
 
 import { Loader } from '../Loader/template'
 import { Link } from '@reach/router'
-import { ExtLink } from '../ExtLink'
+import { ExternalLink } from '../ExternalLink'
 
 const tablehead = [
   "Type",
@@ -49,7 +49,7 @@ export const DataTable: React.FC<DataTableInterface> = ({ data, isLoading }) => 
                     <FeatureList>{item.features.map((feature: any) => <FeatureListItem key={feature}>{feature}</FeatureListItem>)}</FeatureList>
                   </TableCell>
                   <TableCell>
-                    <ExtLink link={item.link} label={"Product page"} />
+                    <ExternalLink link={item.link} label={"Product page"} />
                   </TableCell>
                 </tr>
               })}

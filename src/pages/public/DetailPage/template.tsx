@@ -3,7 +3,7 @@ import { RouteComponentProps, Link } from '@reach/router'
 import { Paper } from '../../../components/Paper'
 import { Section } from '../../../components/Section'
 import axios from "axios"
-import { ExtLink } from '../../../components/ExtLink'
+import { ExternalLink } from '../../../components/ExternalLink'
 import { Model, Segment, Make, Head, BackLink, FeatureList, FeatureListItem } from './styles'
 
 interface ItemDetailPageProps extends RouteComponentProps {
@@ -45,7 +45,7 @@ export const ItemDetailPage: React.FC<ItemDetailPageProps> = ({ id }) => {
             </FeatureList>
           </Segment>
           <Segment>
-            <ExtLink link={detail.link} label={"Product page"} />
+            <ExternalLink link={detail.link} label={"Product page"} />
           </Segment>
         </>
         )
