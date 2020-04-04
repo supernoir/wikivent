@@ -13,6 +13,7 @@ import {
 import { Loader } from '../Loader/template'
 import { Link } from '@reach/router'
 import { ExternalLink } from '../ExternalLink'
+import { TextLink } from '../TextLink/styles'
 
 const tablehead = [
   "Type",
@@ -44,7 +45,7 @@ export const DataTable: React.FC<DataTableInterface> = ({ data, isLoading }) => 
                 return <tr key={item.id}>
                   <TableCell>{item.type}</TableCell>
                   <TableCell>{item.make}</TableCell>
-                  <TableCell><Link to={`/detail/${item.id}`}>{item.model}</Link></TableCell>
+                  <TableCell><TextLink to={`/detail/${item.id}`}>{item.model}</TextLink></TableCell>
                   <TableCell>
                     <FeatureList>{item.features.map((feature: any) => <FeatureListItem key={feature}>{feature}</FeatureListItem>)}</FeatureList>
                   </TableCell>

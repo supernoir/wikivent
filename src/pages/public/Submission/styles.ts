@@ -51,3 +51,7 @@ export const TextArea = styled.textarea`
 export const Label = styled.label`
   margin: 0.5em 0;
 `
+export const Divider = styled.div`
+  margin: 0.5em 0;
+  border-bottom: 1px solid grey;
+`

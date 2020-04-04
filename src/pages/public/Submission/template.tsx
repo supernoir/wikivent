@@ -9,8 +9,11 @@ import {
   FormComponent,
   TextInput,
   TextArea,
-  Label
+  Label,
+  Divider
 } from './styles'
+import { ventilatorTypeOptions } from '../../../types/inventory/VentilatorTypes'
+import { Select } from '../../../components/Select/template'
 
 interface FormPageProps extends RouteComponentProps { }
 
@@ -23,6 +26,11 @@ export const FormPage: React.FC<FormPageProps> = (props) => {
     const formValue = evt.currentTarget.value;
     const formId = evt.currentTarget.id
     setForm({ ...form, [formId]: formValue })
+  }
+
+  const handleSelect = (id: string, val: string) => {
+    console.log(val)
+    setForm({ ...form, [id]: val })
   }
 
   const handleSubmit = (evt: React.MouseEvent) => {
@@ -43,12 +51,16 @@ export const FormPage: React.FC<FormPageProps> = (props) => {
       <p>We will validate your submission and add the missing ventilator as soon as possible</p>
       <Form>
         <FormComponent>
+          <Select label={"Type of Ventilator"} options={ventilatorTypeOptions} onChange={handleSelect} />
+        </FormComponent>
+        <Divider />
+        <FormComponent>
           <Label>Make</Label>
-          <TextInput id="make" type="text" onChange={handleInput} required />
+          <TextInput id="make" type="text" placeholder={"Dräger"} onChange={handleInput} required />
         </FormComponent>
         <FormComponent>
           <Label>Model</Label>
-          <TextInput id="model" type="text" onChange={handleInput} required />
+          <TextInput id="model" type="text" placeholder={"Evita v300"} onChange={handleInput} required />
         </FormComponent>
         <FormComponent>
           <Label>Features</Label>
@@ -56,7 +68,28 @@ export const FormPage: React.FC<FormPageProps> = (props) => {
         </FormComponent>
         <FormComponent>
           <Label>Link</Label>
-          <TextInput id="link" type="text" onChange={handleInput} />
+          <TextInput id="link" type="text" placeholder="www.ventilator-producer.com" onChange={handleInput} />
+        </FormComponent>
+        <Divider />
+        <FormComponent>
+          <Label>Series</Label>
+          <TextInput id="series" type="text" placeholder={"Evita series"} onChange={handleInput} />
+        </FormComponent>
+        <FormComponent>
+          <Label>Specifications</Label>
+          <TextArea id="specs" onChange={handleInput} />
+        </FormComponent>
+        <FormComponent>
+          <Label>Availability</Label>
+          <TextInput id="availability" placeholder={"EU, EWR, NAFTA, EMEA, ASEAN"} type="text" onChange={handleInput} />
+        </FormComponent>
+        <FormComponent>
+          <Label>Sources</Label>
+          <TextInput id="sources" type="text" onChange={handleInput} />
+        </FormComponent>
+        <FormComponent>
+          <Label>FDA regulation number</Label>
+          <TextInput id="regNumber" type="text" onChange={handleInput} />
         </FormComponent>
         <Button type="submit" onClick={handleSubmit}>Submit</Button>
       </Form>

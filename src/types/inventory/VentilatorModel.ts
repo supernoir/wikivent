@@ -31,5 +31,7 @@ export interface VentilatorModel {
   // Link to product page
   extlink?: string,
   // List of sources
-  sources?: []
+  sources?: [],
+  // FDA regulation number
+  regNumber: string
 }

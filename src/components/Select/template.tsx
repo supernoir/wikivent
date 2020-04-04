@@ -9,7 +9,7 @@ export type Option = {
 export interface SelectInterface {
   label: string;
   options: Option[];
-  onChange?: () => void
+  onChange?: (id: string, val: string) => void
 }
 
 
@@ -20,6 +20,10 @@ export const Select: React.FC<SelectInterface> = ({ label, options, onChange }) 
     evt.preventDefault()
     let newSelection = evt?.currentTarget?.value
     setSelection(newSelection)
+    if (onChange) {
+      const formId = evt.currentTarget.id
+      onChange(formId, newSelection)
+    }
   }
 
   return (
