@@ -7,7 +7,7 @@ import { DataTable } from '../../../components/DataTable/template'
 import { Paper } from '../../../components/Paper/styles'
 import axios from "axios"
 import { Select } from '../../../components/Select/template'
-import { VentilatorApplicationTypes, ventilatorTypeOptions } from '../../../types/inventory/VentilatorTypes'
+import { ventilatorTypeOptions, DataContext } from '../../../types/inventory/VentilatorTypes'
 import { toast } from "react-toastify"
 
 interface HomePageProps extends RouteComponentProps { }
@@ -32,6 +32,6 @@ export const HomePage: React.FC<HomePageProps> = (props) => {
 
   return (<Paper>
     <Select label={"Type of Ventilator"} options={ventilatorTypeOptions} />
-    <DataTable data={data} isLoading={isLoading} />
+    <DataTable data={data} isLoading={isLoading} context={DataContext.approved} />
   </Paper>)
 }

@@ -12,10 +12,11 @@ import {
 } from './styles';
 import { Select } from '../Select/template';
 import { toast } from "react-toastify";
-import { ventilatorTypeOptions, VentilatorFormModeType } from '../../types/inventory/VentilatorTypes';
+import { ventilatorTypeOptions, VentilatorFormModeType, DataContextType } from '../../types/inventory/VentilatorTypes';
 
 interface VentilatorFormProps extends RouteComponentProps {
   mode: VentilatorFormModeType,
+  context: DataContextType,
   data?: any
 }
 

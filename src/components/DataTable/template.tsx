@@ -11,10 +11,10 @@ import {
 } from './styles'
 
 import { Loader } from '../Loader/template'
-import { Link } from '@reach/router'
 import { ExternalLink } from '../ExternalLink'
 import { TextLink } from '../TextLink/styles'
 import { EmptyState } from '../EmptyState/template'
+import { DataContextType, DataContext } from '../../types/inventory/VentilatorTypes'
 
 const tablehead = [
   "Type",
@@ -24,12 +24,22 @@ const tablehead = [
   "Link"
 ]
 
+const tableheadSubmitted = [
+  "Type",
+  "Make",
+  "Model",
+  "Features",
+  "Link",
+  "Actions"
+]
+
 export interface DataTableInterface {
   data: any,
+  context: DataContextType,
   isLoading: boolean
 }
 
-export const DataTable: React.FC<DataTableInterface> = ({ data, isLoading }) => {
+export const DataTable: React.FC<DataTableInterface> = ({ data, context, isLoading }) => {
   return (
     <DataTableWrapper>
       {
@@ -38,7 +48,10 @@ export const DataTable: React.FC<DataTableInterface> = ({ data, isLoading }) => 
           : <Table>
             <TableHead>
               <TableHeadRow>
-                {tablehead.map((head) => <TableCell key={head}>{head}</TableCell>)}
+                {context === DataContext.submitted
+                  ? tableheadSubmitted.map((head) => <TableCell key={head}>{head}</TableCell>)
+                  : tablehead.map((head) => <TableCell key={head}>{head}</TableCell>)
+                }
               </TableHeadRow>
             </TableHead>
             <TableBody>
@@ -54,6 +67,13 @@ export const DataTable: React.FC<DataTableInterface> = ({ data, isLoading }) => 
                     <TableCell>
                       <ExternalLink link={item.link} label={"Product page"} />
                     </TableCell>
+                    {context === DataContext.submitted && <TableCell>
+                      <TextLink to="/">{"Edit"}</TextLink>
+                      <TextLink to="/">{"Verify"}</TextLink>
+                      <TextLink to="/">{"Delete"}</TextLink>
+                    </TableCell>
+                    }
+
                   </tr>
                 })
                 : <EmptyState message={"No entries found"} />

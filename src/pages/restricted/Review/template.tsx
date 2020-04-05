@@ -7,6 +7,7 @@ import { DataTable } from '../../../components/DataTable/template'
 import { Paper } from '../../../components/Paper/styles'
 import axios from "axios"
 import { toast } from "react-toastify"
+import { DataContext } from '../../../types/inventory/VentilatorTypes'
 
 interface ReviewPage extends RouteComponentProps { }
 
@@ -30,6 +31,6 @@ export const ReviewPage: React.FC<ReviewPage> = (props) => {
   }
 
   return (<Paper>
-    <DataTable data={data} isLoading={isLoading} />
+    <DataTable data={data} isLoading={isLoading} context={DataContext.submitted} />
   </Paper>)
 }

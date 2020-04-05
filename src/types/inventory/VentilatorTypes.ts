@@ -37,3 +37,10 @@ export enum VentilatorFormModes {
 }
 
 export type VentilatorFormModeType = VentilatorFormModes.edit | VentilatorFormModes.create
+
+export enum DataContext {
+  approved = "approved",
+  submitted = "submitted"
+}
+
+export type DataContextType = DataContext.approved | DataContext.submitted
