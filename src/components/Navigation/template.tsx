@@ -1,5 +1,6 @@
 import React from 'react'
 import { StyledNavigationList, StyledNavigationListItem, StyledLink } from './styles'
+import { Select } from '../Select/template'
 
 type MenuItem = {
   id: number;
@@ -30,6 +31,24 @@ export const menuitems: MenuItem[] = [
   },
 ]
 
+const languageOptions = [
+  {
+    id: 0,
+    label: "English",
+    value: "en"
+  },
+  {
+    id: 1,
+    label: "German",
+    value: "de"
+  },
+  {
+    id: 2,
+    label: "French",
+    value: "fr"
+  }
+]
+
 export const Navigation: React.FC = () => {
   return (
     <nav>
@@ -44,6 +63,7 @@ export const Navigation: React.FC = () => {
           )
         })}
       </StyledNavigationList>
+      <Select options={languageOptions} />
     </nav>
   )
 }

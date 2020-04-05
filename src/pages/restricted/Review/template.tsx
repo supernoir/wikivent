@@ -1,14 +1,35 @@
-import React from 'react'
+import React, {
+  useState,
+  useEffect
+} from 'react'
 import { RouteComponentProps } from '@reach/router'
-import { Paper } from '../../../components/Paper'
-import { Section } from '../../../components/Section'
+import { DataTable } from '../../../components/DataTable/template'
+import { Paper } from '../../../components/Paper/styles'
+import axios from "axios"
+import { toast } from "react-toastify"
 
-interface ReviewPageProps extends RouteComponentProps { }
+interface ReviewPage extends RouteComponentProps { }
 
-export const ReviewPage: React.FC<ReviewPageProps> = (props) => {
+export const ReviewPage: React.FC<ReviewPage> = (props) => {
+  const [data, setData] = useState([])
+  const [isLoading, setIsLoading] = useState(false)
+
+  useEffect(() => {
+    axios.get(
+      `http://localhost:8081/submitted/get`,
+    ).then(result => setApprovedItems(result.data))
+      .catch(err => {
+        toast.error(err.message)
+      });
+  }, [])
+
+
+  function setApprovedItems(newData: any) {
+    console.log(newData)
+    setData(newData)
+  }
+
   return (<Paper>
-    <Section>
-      <h1>{"Review"}</h1>
-    </Section>
+    <DataTable data={data} isLoading={isLoading} />
   </Paper>)
 }

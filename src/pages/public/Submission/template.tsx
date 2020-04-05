@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import axios from "axios"
-import { RouteComponentProps } from '@reach/router'
+import { RouteComponentProps, navigate } from '@reach/router'
 import { Paper } from '../../../components/Paper/styles'
 import { Section } from '../../../components/Section'
 import { Button } from '../../../components/Button'
@@ -14,6 +14,7 @@ import {
 } from './styles'
 import { ventilatorTypeOptions } from '../../../types/inventory/VentilatorTypes'
 import { Select } from '../../../components/Select/template'
+import { toast } from "react-toastify"
 
 interface FormPageProps extends RouteComponentProps { }
 
@@ -21,15 +22,21 @@ export const FormPage: React.FC<FormPageProps> = (props) => {
 
   const [form, setForm] = useState({})
 
-  const handleInput = (evt: React.ChangeEvent<HTMLInputElement & HTMLTextAreaElement>) => {
+  const handleInput = (evt: React.ChangeEvent<HTMLInputElement>) => {
     evt.preventDefault();
     const formValue = evt.currentTarget.value;
     const formId = evt.currentTarget.id
     setForm({ ...form, [formId]: formValue })
   }
 
+  const handleTextAreaInput = (evt: React.ChangeEvent<HTMLTextAreaElement>) => {
+    evt.preventDefault();
+    const formValue = evt.currentTarget.value.trim().split(",");
+    const formId = evt.currentTarget.id
+    setForm({ ...form, [formId]: formValue })
+  }
+
   const handleSelect = (id: string, val: string) => {
-    console.log(val)
     setForm({ ...form, [id]: val })
   }
 
@@ -38,9 +45,15 @@ export const FormPage: React.FC<FormPageProps> = (props) => {
     if (Object.keys(form).length > 0) {
       axios.post(
         `http://localhost:8081/submitted/new`, form
-      ).then(result => console.log(result));
+      ).then(result => {
+        if (result.status = 200) {
+          toast.success("New ventilator data submitted!")
+          navigate(`/`)
+        }
+      })
+        .catch(err => toast.error(err.message));
     } else {
-      console.error("Missing input")
+      toast.error("Missing input")
     }
   }
 
@@ -51,7 +64,7 @@ export const FormPage: React.FC<FormPageProps> = (props) => {
       <p>We will validate your submission and add the missing ventilator as soon as possible</p>
       <Form>
         <FormComponent>
-          <Select label={"Type of Ventilator"} options={ventilatorTypeOptions} onChange={handleSelect} />
+          <Select label={"Type of Ventilator"} id={"type"} options={ventilatorTypeOptions} onChange={handleSelect} />
         </FormComponent>
         <Divider />
         <FormComponent>
@@ -64,7 +77,7 @@ export const FormPage: React.FC<FormPageProps> = (props) => {
         </FormComponent>
         <FormComponent>
           <Label>Features</Label>
-          <TextArea id="features" onChange={handleInput} />
+          <TextArea id="features" onChange={handleTextAreaInput} />
         </FormComponent>
         <FormComponent>
           <Label>Link</Label>
@@ -77,7 +90,7 @@ export const FormPage: React.FC<FormPageProps> = (props) => {
         </FormComponent>
         <FormComponent>
           <Label>Specifications</Label>
-          <TextArea id="specs" onChange={handleInput} />
+          <TextArea id="specs" onChange={handleTextAreaInput} />
         </FormComponent>
         <FormComponent>
           <Label>Availability</Label>

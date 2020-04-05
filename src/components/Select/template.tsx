@@ -7,13 +7,13 @@ export type Option = {
 }
 
 export interface SelectInterface {
-  label: string;
+  label?: string;
   options: Option[];
+  id?: string;
   onChange?: (id: string, val: string) => void
 }
 
-
-export const Select: React.FC<SelectInterface> = ({ label, options, onChange }) => {
+export const Select: React.FC<SelectInterface> = ({ id, label, options, onChange }) => {
   const [selection, setSelection] = useState({})
 
   const handleChange = (evt: React.ChangeEvent<HTMLSelectElement>) => {
@@ -29,7 +29,7 @@ export const Select: React.FC<SelectInterface> = ({ label, options, onChange }) 
   return (
     <div>
       <label>{label}</label>
-      <select onChange={handleChange}>
+      <select id={id || "select"} onChange={handleChange}>
         {options.map((option: Option) => {
           return <option key={option.id} value={option.value}>{option.label}</option>
         })}

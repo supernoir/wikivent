@@ -23,15 +23,30 @@ app.get("/", (req, res) => {
 })
 
 // Routes
-app.route('/approved/get').get(get)
+app.route('/approved/get').get(getApproved)
 app.route('/approved/get/:id').get(getById)
-app.route('/submitted/new').put(create);
+app.route('/submitted/new').post(create);
+app.route('/submitted/get').get(getSubmitted)
 
 app.use(closeConnection)
 
-function get(req, res, next) {
+function getApproved(req, res, next) {
 	rdb
 		.table('approved')
+		.run(req._rdbConn)
+		.then(function (cursor) {
+			return cursor.toArray()
+		})
+		.then(function (result) {
+			res.send(JSON.stringify(result))
+		})
+		.error(handleError(res))
+		.finally(next)
+}
+
+function getSubmitted(req, res, next) {
+	rdb
+		.table('submitted')
 		.run(req._rdbConn)
 		.then(function (cursor) {
 			return cursor.toArray()
@@ -62,13 +77,14 @@ function getById(req, res, next) {
 			.finally(next)
 	}
 	else {
-		handleError(res)(new Error("The todo must have a field `id`."));
+		handleError(res)(new Error("The data must have a field `id`."));
 		next();
 	}
 }
 
 function create(req, res, next) {
 	const submission = req.body;
+	console.log(submission)
 	submission.createdAt = rdb.now();
 	rdb.table('submitted')
 		.insert(submission, { returnChanges: true })

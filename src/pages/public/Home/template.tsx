@@ -8,7 +8,7 @@ import { Paper } from '../../../components/Paper/styles'
 import axios from "axios"
 import { Select } from '../../../components/Select/template'
 import { VentilatorApplicationTypes, ventilatorTypeOptions } from '../../../types/inventory/VentilatorTypes'
-
+import { toast } from "react-toastify"
 
 interface HomePageProps extends RouteComponentProps { }
 
@@ -19,7 +19,10 @@ export const HomePage: React.FC<HomePageProps> = (props) => {
   useEffect(() => {
     axios.get(
       `http://localhost:8081/approved/get`,
-    ).then(result => setApprovedItems(result.data));
+    ).then(result => setApprovedItems(result.data))
+      .catch(err => {
+        toast.error(err.message)
+      });
   }, [])
 
 

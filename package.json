@@ -16,6 +16,7 @@
     "@types/node": "^13.9.8",
     "@types/react": "^16.9.0",
     "@types/react-dom": "^16.9.0",
+    "@types/react-toastify": "^4.1.0",
     "@types/styled-components": "^5.0.1",
     "axios": "^0.19.2",
     "cors": "^2.8.5",
@@ -25,6 +26,7 @@
     "react-dom": "^16.13.1",
     "react-scripts": "3.4.1",
     "react-table": "^7.0.0",
+    "react-toastify": "^5.5.0",
     "rethinkdb": "^2.4.2",
     "styled-components": "^5.0.1",
     "typescript": "~3.7.2"

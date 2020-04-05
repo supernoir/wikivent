@@ -3,7 +3,7 @@ import styled, { createGlobalStyle } from "styled-components"
 export const GlobalStyle = createGlobalStyle`
 @import url('https://fonts.googleapis.com/css?family=Source+Sans+Pro&display=swap');
   html, body, #root, .App {
-  height: 100vh;
+  min-height: 100vh;
   font-family: 'Source Sans Pro', sans-serif;
   margin: 0;
   padding: 0;

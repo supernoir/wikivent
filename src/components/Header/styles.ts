@@ -29,5 +29,5 @@ export const StyledHeader = styled.header`
   align-items: center;
   padding: 0.4em;
   border-radius: 6px;
-  margin-bottom: 1em;
+  margin: 1em 0;
 `
