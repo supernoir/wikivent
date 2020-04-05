@@ -30,3 +30,10 @@ export const ventilatorTypeOptions = [
     label: "Neonatal care"
   },
 ]
+
+export enum VentilatorFormModes {
+  edit = "edit",
+  create = "create"
+}
+
+export type VentilatorFormModeType = VentilatorFormModes.edit | VentilatorFormModes.create
