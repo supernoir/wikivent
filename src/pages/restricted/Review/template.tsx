@@ -24,9 +24,7 @@ export const ReviewPage: React.FC<ReviewPage> = (props) => {
       });
   }, [])
 
-
   function setApprovedItems(newData: any) {
-    console.log(newData)
     setData(newData)
   }
 

@@ -22,7 +22,6 @@ export const ItemDetailPage: React.FC<ItemDetailPageProps> = ({ id }) => {
 
 
   function setApprovedItems(newData: any) {
-    console.log(newData)
     setData(newData)
   }
 

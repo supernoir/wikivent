@@ -7,7 +7,8 @@ import {
   TableCell,
   FeatureList,
   FeatureListItem,
-  DataTableWrapper
+  DataTableWrapper,
+  ActionLinkList
 } from './styles'
 
 import { Loader } from '../Loader/template'
@@ -15,6 +16,10 @@ import { ExternalLink } from '../ExternalLink'
 import { TextLink } from '../TextLink/styles'
 import { EmptyState } from '../EmptyState/template'
 import { DataContextType, DataContext } from '../../types/inventory/VentilatorTypes'
+import { ActionLinkTypes, ActionLink } from '../ActionLink/template'
+import axios from "axios"
+import { toast } from "react-toastify"
+
 
 const tablehead = [
   "Type",
@@ -40,6 +45,32 @@ export interface DataTableInterface {
 }
 
 export const DataTable: React.FC<DataTableInterface> = ({ data, context, isLoading }) => {
+
+  const handleEdit = (evt: React.MouseEvent) => {
+    evt.preventDefault()
+    console.log("Edit!")
+  }
+
+  const handleVerify = (evt: React.MouseEvent) => {
+    evt.preventDefault()
+    console.log("Verify!")
+  }
+
+  const handleDelete = (evt: React.MouseEvent) => {
+    evt.preventDefault()
+    const id = evt.currentTarget.id
+
+    axios.post(
+      `http://localhost:8081/submitted/delete/${id}`,
+    ).then(result => {
+      if (result.status = 200) {
+        toast.success("Ventilator submission deleted!")
+      }
+    })
+      .catch(err => toast.error(err.message));
+
+  }
+
   return (
     <DataTableWrapper>
       {
@@ -68,9 +99,11 @@ export const DataTable: React.FC<DataTableInterface> = ({ data, context, isLoadi
                       <ExternalLink link={item.link} label={"Product page"} />
                     </TableCell>
                     {context === DataContext.submitted && <TableCell>
-                      <TextLink to="/">{"Edit"}</TextLink>
-                      <TextLink to="/">{"Verify"}</TextLink>
-                      <TextLink to="/">{"Delete"}</TextLink>
+                      <ActionLinkList>
+                        <ActionLink type={ActionLinkTypes.edit} onClick={handleEdit} id={item.id} />
+                        <ActionLink type={ActionLinkTypes.verify} onClick={handleVerify} id={item.id} />
+                        <ActionLink type={ActionLinkTypes.delete} onClick={handleDelete} id={item.id} />
+                      </ActionLinkList>
                     </TableCell>
                     }
 

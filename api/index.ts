@@ -27,6 +27,7 @@ app.route('/approved/get').get(getApproved)
 app.route('/approved/get/:id').get(getById)
 app.route('/submitted/new').post(create);
 app.route('/submitted/get').get(getSubmitted)
+app.route('/submitted/delete/:id').post(deleteSubmittedById)
 
 app.use(closeConnection)
 
@@ -64,6 +65,31 @@ function getById(req, res, next) {
 		rdb
 			.table('approved')
 			.get(queryId)
+			.run(req._rdbConn)
+			.then((cursor) => {
+				console.log(cursor)
+				return cursor
+			})
+			.then((result) => {
+				console.log(result)
+				res.send(JSON.stringify(result))
+			})
+			.error(handleError(res))
+			.finally(next)
+	}
+	else {
+		handleError(res)(new Error("The data must have a field `id`."));
+		next();
+	}
+}
+
+function deleteSubmittedById(req, res, next) {
+	if ((req) && (req.params != null)) {
+		const queryId = req.params.id
+		rdb
+			.table('submitted')
+			.get(queryId)
+			.delete()
 			.run(req._rdbConn)
 			.then((cursor) => {
 				console.log(cursor)

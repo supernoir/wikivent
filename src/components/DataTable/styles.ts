@@ -46,3 +46,8 @@ export const FeatureList = styled.ul`
 
 export const FeatureListItem = styled.li`
 `
+
+export const ActionLinkList = styled.div`
+  display: flex;
+  flex-direction: row;
+`

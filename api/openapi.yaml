@@ -1,0 +1,26 @@
+openapi: "3.0.0"
+
+info:
+  version: 0.0.1
+  title: WikiVent API
+  description: A simple API to learn how to write OpenAPI Specification
+
+paths:
+  /approved:
+    get:
+      summary: Get approved ventilators
+      description: Returns a list of all submitted & verified ventilators
+      responses:
+        200:
+          description: A list of ventilators
+          content:
+            application/json:
+              examples:
+                items:
+                  value:
+                    type:
+                      type: string
+                    make:
+                      type: string
+                    model:
+                      type: string
