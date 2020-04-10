@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Suspense } from 'react';
 import { StyledApp } from './styles';
 import { Header } from './components/Header/template';
 import { Footer } from './components/Footer/template';
@@ -11,6 +11,8 @@ import { ItemDetailPage } from './pages/public/DetailPage/template';
 import { ReviewPage } from './pages/restricted/Review/template'
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import { Loader } from './components/Loader/template'
+
 
 const languages = {
   en: "en",
@@ -23,22 +25,24 @@ const LanguageContext = React.createContext(languages.en);
 export const App: React.FC = () => {
   return (
     <StyledApp>
-      <LanguageContext.Provider value={languages.en}>
-        <ToastContainer />
-        <Header />
-        <Router>
-          {/** PUBLIC ROUTES */}
-          <HomePage path="/" />
-          <ItemDetailPage path="/vent/:id" />
-          <FormPage path="/form" />
-          <GlossaryPage path="/glossary" />
-          <AboutPage path="/about" />
-          <ItemDetailPage path="detail/:id" />
-          {/** RESTRICTED ROUTES */}
-          <ReviewPage path="/review" />
-        </Router>
-        <Footer />
-      </LanguageContext.Provider>
+      <Suspense fallback={<Loader />}>
+        <LanguageContext.Provider value={languages.en}>
+          <ToastContainer />
+          <Header />
+          <Router>
+            {/** PUBLIC ROUTES */}
+            <HomePage path="/" />
+            <ItemDetailPage path="/vent/:id" />
+            <FormPage path="/form" />
+            <GlossaryPage path="/glossary" />
+            <AboutPage path="/about" />
+            <ItemDetailPage path="detail/:id" />
+            {/** RESTRICTED ROUTES */}
+            <ReviewPage path="/review" />
+          </Router>
+          <Footer />
+        </LanguageContext.Provider>
+      </Suspense>
     </StyledApp>
   );
 }

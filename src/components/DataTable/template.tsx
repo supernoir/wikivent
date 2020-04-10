@@ -63,7 +63,7 @@ export const DataTable: React.FC<DataTableInterface> = ({ data, context, isLoadi
     axios.post(
       `http://localhost:8081/submitted/delete/${id}`,
     ).then(result => {
-      if (result.status = 200) {
+      if (result.status === 200) {
         toast.success("Ventilator submission deleted!")
       }
     })
