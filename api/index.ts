@@ -24,6 +24,10 @@ app.get("/", (req, res) => {
 
 // Routes
 app.route('/approved/get').get(getApproved)
+app.route('/approved/makes').get(getAllApprovedMakes)
+app.route('/approved/makes/:make').get(filterApprovedByMake)
+app.route('/approved/models').get(getAllApprovedModels)
+app.route('/approved/models/:model').get(filterApprovedByModel)
 app.route('/approved/get/:id').get(getById)
 app.route('/submitted/new').post(create);
 app.route('/submitted/get').get(getSubmitted)
@@ -34,6 +38,78 @@ app.use(closeConnection)
 function getApproved(req, res, next) {
 	rdb
 		.table('approved')
+		.run(req._rdbConn)
+		.then(function (cursor) {
+			return cursor.toArray()
+		})
+		.then(function (result) {
+			res.send(JSON.stringify(result))
+		})
+		.error(handleError(res))
+		.finally(next)
+}
+
+function getAllApprovedMakes(req, res, next) {
+	rdb
+		.table("approved").pluck("make")
+		.distinct()
+		.run(req._rdbConn)
+		.then(function (cursor) {
+			return cursor.toArray()
+		})
+		.then(function (result) {
+			res.send(JSON.stringify(result))
+		})
+		.error(handleError(res))
+		.finally(next)
+}
+
+function filterApprovedByMake(req, res, next) {
+	if ((req) && (req.params != null)) {
+		const query = req.params.make
+		rdb
+			.table("approved")
+			.filter({ 'make': query })
+			.run(req._rdbConn)
+			.then(function (cursor) {
+				return cursor.toArray()
+			})
+			.then(function (result) {
+				res.send(JSON.stringify(result))
+			})
+			.error(handleError(res))
+			.finally(next)
+	} else {
+		handleError(res)(new Error("The data must have a field `make`."));
+		next();
+	}
+}
+
+function filterApprovedByModel(req, res, next) {
+	if ((req) && (req.params != null)) {
+		const query = req.params.model
+		rdb
+			.table("approved")
+			.filter({ 'model': query })
+			.run(req._rdbConn)
+			.then(function (cursor) {
+				return cursor.toArray()
+			})
+			.then(function (result) {
+				res.send(JSON.stringify(result))
+			})
+			.error(handleError(res))
+			.finally(next)
+	} else {
+		handleError(res)(new Error("The data must have a field `model`."));
+		next();
+	}
+}
+
+function getAllApprovedModels(req, res, next) {
+	rdb
+		.table("approved").pluck("model")
+		.distinct()
 		.run(req._rdbConn)
 		.then(function (cursor) {
 			return cursor.toArray()

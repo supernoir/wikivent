@@ -63,7 +63,6 @@ export const Navigation: React.FC = () => {
           )
         })}
       </StyledNavigationList>
-      <Select options={languageOptions} />
     </nav>
   )
 }

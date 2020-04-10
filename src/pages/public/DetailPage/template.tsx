@@ -4,7 +4,9 @@ import { Paper } from '../../../components/Paper'
 import { Section } from '../../../components/Section'
 import axios from "axios"
 import { ExternalLink } from '../../../components/ExternalLink'
-import { Model, Segment, Make, Head, BackLink, FeatureList, FeatureListItem } from './styles'
+import { Model, Make, Head, FeatureList, FeatureListItem } from './styles'
+import { BackLink } from '../../../components/BackLink/styles'
+import { Segment } from '../../../components/Segment/styles'
 
 interface ItemDetailPageProps extends RouteComponentProps {
   id?: string

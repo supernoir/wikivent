@@ -23,15 +23,6 @@ export const Head = styled.div`
   flex-direction: row;
 `
 
-export const BackLink = styled(Link)`
-  color: cadetblue;
-  text-decoration: none;
-  cursor: pointer;
-
-  &:hover {
-    color: black;
-  } 
-`
 
 export const FeatureList = styled.ul`
   margin: 1em 0;

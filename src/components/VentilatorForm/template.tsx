@@ -9,7 +9,7 @@ import {
   TextArea,
   Label,
   Divider
-} from './styles';
+} from '../FormComponents/styles';
 import { Select } from '../Select/template';
 import { toast } from "react-toastify";
 import { ventilatorTypeOptions, VentilatorFormModeType, DataContextType } from '../../types/inventory/VentilatorTypes';
