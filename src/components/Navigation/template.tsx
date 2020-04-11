@@ -1,6 +1,6 @@
 import React from 'react'
 import { StyledNavigationList, StyledNavigationListItem, StyledLink } from './styles'
-import { Select } from '../Select/template'
+import { useTranslation } from 'react-i18next';
 
 type MenuItem = {
   id: number;
@@ -17,7 +17,7 @@ export const menuitems: MenuItem[] = [
   {
     id: 2,
     target: "/form",
-    label: "Submit ventilator"
+    label: "Submit Ventilator"
   },
   {
     id: 3,
@@ -31,25 +31,9 @@ export const menuitems: MenuItem[] = [
   },
 ]
 
-const languageOptions = [
-  {
-    id: 0,
-    label: "English",
-    value: "en"
-  },
-  {
-    id: 1,
-    label: "German",
-    value: "de"
-  },
-  {
-    id: 2,
-    label: "French",
-    value: "fr"
-  }
-]
-
 export const Navigation: React.FC = () => {
+  const { t } = useTranslation();
+
   return (
     <nav>
       <StyledNavigationList>
@@ -57,7 +41,7 @@ export const Navigation: React.FC = () => {
           return (
             <StyledNavigationListItem key={item.id}>
               <StyledLink to={item.target}>
-                {item.label}
+                {t(item.label)}
               </StyledLink>
             </StyledNavigationListItem>
           )
