@@ -12,7 +12,8 @@ import { ReviewPage } from './pages/restricted/Review/template'
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { Loader } from './components/Loader/template'
-
+import { NetworkErrorBoundary } from 'rest-hooks';
+import { Grommet } from 'grommet';
 
 const languages = {
   en: "en",
@@ -24,25 +25,30 @@ const LanguageContext = React.createContext(languages.en);
 
 export const App: React.FC = () => {
   return (
-    <StyledApp>
-      <Suspense fallback={<Loader />}>
-        <LanguageContext.Provider value={languages.en}>
-          <ToastContainer />
-          <Header />
-          <Router>
-            {/** PUBLIC ROUTES */}
-            <HomePage path="/" />
-            <ItemDetailPage path="/vent/:id" />
-            <FormPage path="/form" />
-            <GlossaryPage path="/glossary" />
-            <AboutPage path="/about" />
-            <ItemDetailPage path="detail/:id" />
-            {/** RESTRICTED ROUTES */}
-            <ReviewPage path="/review" />
-          </Router>
-          <Footer />
-        </LanguageContext.Provider>
-      </Suspense>
-    </StyledApp>
+    <Grommet plain>
+
+      <StyledApp>
+        <Suspense fallback={<Loader />}>
+          <NetworkErrorBoundary>
+            <LanguageContext.Provider value={languages.en}>
+              <ToastContainer />
+              <Header />
+              <Router>
+                {/** PUBLIC ROUTES */}
+                <HomePage path="/" />
+                <ItemDetailPage path="/vent/:id" />
+                <FormPage path="/form" />
+                <GlossaryPage path="/glossary" />
+                <AboutPage path="/about" />
+                <ItemDetailPage path="detail/:id" />
+                {/** RESTRICTED ROUTES */}
+                <ReviewPage path="/review" />
+              </Router>
+              <Footer />
+            </LanguageContext.Provider>
+          </NetworkErrorBoundary>
+        </Suspense>
+      </StyledApp>
+    </Grommet>
   );
 }

@@ -21,6 +21,7 @@ export const HomePage: React.FC<HomePageProps> = (props) => {
   const [makeFilterOptions, setMakeFilterOptions] = useState([])
   const [modelFilterOptions, setModelFilterOptions] = useState([])
 
+
   const getOptionsFromData = (data: any, type: string) => {
     if (data && data.length > 0) {
       let options = data.map((item: any, index: number) => {

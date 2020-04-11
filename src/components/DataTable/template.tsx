@@ -1,10 +1,5 @@
 import React from 'react'
 import {
-  Table,
-  TableHead,
-  TableBody,
-  TableHeadRow,
-  TableCell,
   FeatureList,
   FeatureListItem,
   DataTableWrapper,
@@ -14,29 +9,11 @@ import {
 import { Loader } from '../Loader/template'
 import { ExternalLink } from '../ExternalLink'
 import { TextLink } from '../TextLink/styles'
-import { EmptyState } from '../EmptyState/template'
 import { DataContextType, DataContext } from '../../types/inventory/VentilatorTypes'
 import { ActionLinkTypes, ActionLink } from '../ActionLink/template'
 import axios from "axios"
 import { toast } from "react-toastify"
-
-
-const tablehead = [
-  "Type",
-  "Make",
-  "Model",
-  "Features",
-  "Link"
-]
-
-const tableheadSubmitted = [
-  "Type",
-  "Make",
-  "Model",
-  "Features",
-  "Link",
-  "Actions"
-]
+import { DataTable as GrommetDataTable, Text } from "grommet"
 
 export interface DataTableInterface {
   data: any,
@@ -45,6 +22,79 @@ export interface DataTableInterface {
 }
 
 export const DataTable: React.FC<DataTableInterface> = ({ data, context, isLoading }) => {
+
+  const columnsApproved = [
+    {
+      property: 'type',
+      header: <Text>Type</Text>,
+      sortable: true,
+      primary: true,
+    },
+    {
+      property: 'make',
+      header: <Text>Make</Text>,
+      sortable: true
+    },
+    {
+      property: 'model',
+      header: <Text>Model</Text>,
+      render: (item: any) => <TextLink to={`/detail/${item.id}`}>{item.model}</TextLink>,
+      sortable: true
+    },
+    {
+      property: 'features',
+      header: <Text>Features</Text>,
+      render: (item: any) => <FeatureList>
+        {item && item.features && item.features.length > 0 && item.features.map((feature: any) => <FeatureListItem key={feature}>{feature}</FeatureListItem>)}
+      </FeatureList>
+    },
+    {
+      property: 'link',
+      header: <Text>Link</Text>,
+      render: (item: any) => <ExternalLink link={item.link} label={"Product page"} />
+    }
+  ]
+
+  const columnsSubmitted = [
+    {
+      property: 'type',
+      header: <Text>Type</Text>,
+      sortable: true,
+      primary: true,
+    },
+    {
+      property: 'make',
+      header: <Text>Make</Text>,
+      sortable: true
+    },
+    {
+      property: 'model',
+      header: <Text>Model</Text>,
+      render: (item: any) => <TextLink to={`/detail/${item.id}`}>{item.model}</TextLink>,
+      sortable: true
+    },
+    {
+      property: 'features',
+      header: <Text>Features</Text>,
+      render: (item: any) => <FeatureList>
+        {item && item.features && item.features.length > 0 && item.features.map((feature: any) => <FeatureListItem key={feature}>{feature}</FeatureListItem>)}
+      </FeatureList>
+    },
+    {
+      property: 'link',
+      header: <Text>Link</Text>,
+      render: (item: any) => <ExternalLink link={item.link} label={"Product page"} />
+    },
+    {
+      property: 'actions',
+      header: <Text>Actions</Text>,
+      render: (item: any) => <ActionLinkList>
+        <ActionLink type={ActionLinkTypes.edit} onClick={handleEdit} id={item.id} />
+        <ActionLink type={ActionLinkTypes.verify} onClick={handleVerify} id={item.id} />
+        <ActionLink type={ActionLinkTypes.delete} onClick={handleDelete} id={item.id} />
+      </ActionLinkList>
+    }
+  ]
 
   const handleEdit = (evt: React.MouseEvent) => {
     evt.preventDefault()
@@ -76,43 +126,18 @@ export const DataTable: React.FC<DataTableInterface> = ({ data, context, isLoadi
       {
         isLoading
           ? <Loader />
-          : <Table>
-            <TableHead>
-              <TableHeadRow>
-                {context === DataContext.submitted
-                  ? tableheadSubmitted.map((head) => <TableCell key={head}>{head}</TableCell>)
-                  : tablehead.map((head) => <TableCell key={head}>{head}</TableCell>)
-                }
-              </TableHeadRow>
-            </TableHead>
-            <TableBody>
-              {data && data.length > 0
-                ? data.map((item: any) => {
-                  return <tr key={item.id}>
-                    <TableCell>{item.type}</TableCell>
-                    <TableCell>{item.make}</TableCell>
-                    <TableCell><TextLink to={`/detail/${item.id}`}>{item.model}</TextLink></TableCell>
-                    <TableCell>
-                      <FeatureList>{item && item.features && item.features.length > 0 && item.features.map((feature: any) => <FeatureListItem key={feature}>{feature}</FeatureListItem>)}</FeatureList>
-                    </TableCell>
-                    <TableCell>
-                      <ExternalLink link={item.link} label={"Product page"} />
-                    </TableCell>
-                    {context === DataContext.submitted && <TableCell>
-                      <ActionLinkList>
-                        <ActionLink type={ActionLinkTypes.edit} onClick={handleEdit} id={item.id} />
-                        <ActionLink type={ActionLinkTypes.verify} onClick={handleVerify} id={item.id} />
-                        <ActionLink type={ActionLinkTypes.delete} onClick={handleDelete} id={item.id} />
-                      </ActionLinkList>
-                    </TableCell>
-                    }
-
-                  </tr>
-                })
-                : <EmptyState message={"No entries found"} />
-              }
-            </TableBody>
-          </Table>
+          : <GrommetDataTable
+            background={{
+              "header": "white",
+              "body": ["white", "light-2"]
+            }
+            }
+            columns={context === DataContext.submitted
+              ? columnsSubmitted
+              : columnsApproved
+            }
+            data={data}
+          />
       }
 
     </DataTableWrapper>
