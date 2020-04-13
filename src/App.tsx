@@ -2,6 +2,7 @@ import React, { Suspense } from 'react';
 import { StyledApp } from './styles';
 import { Header } from './components/Header/template';
 import { Footer } from './components/Footer/template';
+import { Localization } from './components/Localization/template';
 import { Router } from '@reach/router';
 import { HomePage } from './pages/public/Home/template'
 import { FormPage } from './pages/public/Submission/template'
@@ -45,6 +46,7 @@ export const App: React.FC = () => {
                 <ReviewPage path="/review" />
               </Router>
               <Footer />
+              <Localization />
             </LanguageContext.Provider>
           </NetworkErrorBoundary>
         </Suspense>
