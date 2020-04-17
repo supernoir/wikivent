@@ -36,8 +36,10 @@ app.route('/submitted/delete/:id').post(deleteSubmittedById)
 app.use(closeConnection)
 
 function getApproved(req, res, next) {
+	const query = req.query
 	rdb
 		.table('approved')
+		.filter(query)
 		.run(req._rdbConn)
 		.then(function (cursor) {
 			return cursor.toArray()

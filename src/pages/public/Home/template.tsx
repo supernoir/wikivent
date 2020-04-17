@@ -15,9 +15,9 @@ interface HomePageProps extends RouteComponentProps { }
 export const HomePage: React.FC<HomePageProps> = (props) => {
   const [data, setData] = useState([])
   const [isLoading, setIsLoading] = useState(false)
-  const [filterByType, setFilterbyType] = useState([])
-  const [filterByMake, setFilterbyMake] = useState([])
-  const [filterByModel, setFilterbyModel] = useState([])
+  const [filterByType, setFilterbyType] = useState("")
+  const [filterByMake, setFilterbyMake] = useState("")
+  const [filterByModel, setFilterbyModel] = useState("")
   const [makeFilterOptions, setMakeFilterOptions] = useState([])
   const [modelFilterOptions, setModelFilterOptions] = useState([])
 
@@ -37,10 +37,37 @@ export const HomePage: React.FC<HomePageProps> = (props) => {
     }
   }
 
+  const appendFilterToUri = () => {
+    let queries = [{
+      type: "",
+      make: "",
+      model: ""
+    }]
+    let queryKeys = Object.keys(queries[0])
+    let queryValues = Object.values(queries[0])
+    let queryString = ""
+
+    for (let i = 0;i <= queries.length;i++) {
+      if (queryValues[i].length > 0) {
+        if (i === 0) {
+          queryString += "?"
+        }
+        if (i === queries.length) {
+          queryString += `${queryKeys[i]}=${queryValues[i]}`
+        } else {
+          queryString += `${queryKeys[i]}=${queryValues[i]}&`
+        }
+      }
+    }
+
+    return queryString
+  }
+
   useEffect(() => {
+    const query = appendFilterToUri()
     // Get All approved Items from API
     axios.get(
-      `http://localhost:8081/approved/get`,
+      `http://localhost:8081/approved/get${query}`,
     ).then(result => setApprovedItems(result.data))
       .catch(err => {
         toast.error(err.message)
