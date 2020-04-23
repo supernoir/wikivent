@@ -1,6 +1,6 @@
 import styled from "styled-components"
-
-export const Button = styled.button`
+import { Button as GrommetButton } from 'grommet'
+export const Button = styled(GrommetButton)`
   color: snow;
   padding: 1em;
   margin: 1em 0;

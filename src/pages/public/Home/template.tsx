@@ -9,10 +9,12 @@ import axios from "axios"
 import { Select } from '../../../components/Select/template'
 import { ventilatorTypeOptions, DataContext } from '../../../types/inventory/VentilatorTypes'
 import { toast } from "react-toastify"
+import { FilterType, FilterTypes } from '../../../types/filter'
+import { appendFilterToUri } from '../../../services/QueryString'
 
 interface HomePageProps extends RouteComponentProps { }
 
-export const HomePage: React.FC<HomePageProps> = (props) => {
+export const HomePage: React.FC<HomePageProps> = () => {
   const [data, setData] = useState([])
   const [isLoading, setIsLoading] = useState(false)
   const [filterByType, setFilterbyType] = useState("")
@@ -21,13 +23,12 @@ export const HomePage: React.FC<HomePageProps> = (props) => {
   const [makeFilterOptions, setMakeFilterOptions] = useState([])
   const [modelFilterOptions, setModelFilterOptions] = useState([])
 
-
   const getOptionsFromData = (data: any, type: string) => {
     if (data && data.length > 0) {
       let options = data.map((item: any, index: number) => {
         return {
           id: index,
-          value: item[type].trim().toLowerCase(),
+          value: item[type],
           label: item[type]
         }
       })
@@ -37,34 +38,27 @@ export const HomePage: React.FC<HomePageProps> = (props) => {
     }
   }
 
-  const appendFilterToUri = () => {
-    let queries = [{
-      type: "",
-      make: "",
-      model: ""
-    }]
-    let queryKeys = Object.keys(queries[0])
-    let queryValues = Object.values(queries[0])
-    let queryString = ""
-
-    for (let i = 0;i <= queries.length;i++) {
-      if (queryValues[i].length > 0) {
-        if (i === 0) {
-          queryString += "?"
-        }
-        if (i === queries.length) {
-          queryString += `${queryKeys[i]}=${queryValues[i]}`
-        } else {
-          queryString += `${queryKeys[i]}=${queryValues[i]}&`
-        }
-      }
+  const setFilter = (type: FilterType, val: string) => {
+    switch (type) {
+      case FilterTypes.type:
+        return setFilterbyType(val)
+      case FilterTypes.make:
+        return setFilterbyMake(val)
+      case FilterTypes.model:
+        return setFilterbyModel(val)
+      default:
+        break;
     }
-
-    return queryString
   }
 
+
   useEffect(() => {
-    const query = appendFilterToUri()
+    let typeFilter = filterByType
+    let makeFilter = filterByMake
+    let modelFilter = filterByModel
+
+    const query = appendFilterToUri({ type: typeFilter, make: makeFilter, model: modelFilter })
+
     // Get All approved Items from API
     axios.get(
       `http://localhost:8081/approved/get${query}`,
@@ -86,7 +80,7 @@ export const HomePage: React.FC<HomePageProps> = (props) => {
       .catch(err => {
         toast.error(err.message)
       });
-  }, [])
+  }, [filterByMake, filterByModel, filterByType])
 
 
   function setApprovedItems(newData: any) {
@@ -94,9 +88,21 @@ export const HomePage: React.FC<HomePageProps> = (props) => {
   }
 
   return (<Paper>
-    <Select label={"Type of Ventilator"} options={ventilatorTypeOptions} />
-    <Select label={"Make"} options={getOptionsFromData(makeFilterOptions, "make")} />
-    <Select label={"Models"} options={getOptionsFromData(modelFilterOptions, "model")} />
+    <Select
+      label={"Type of Ventilator"}
+      options={ventilatorTypeOptions}
+      onChange={(id, val) => setFilter(FilterTypes.type, val)}
+    />
+    <Select
+      label={"Make"}
+      options={getOptionsFromData(makeFilterOptions, "make")}
+      onChange={(id, val) => setFilter(FilterTypes.make, val)}
+    />
+    <Select
+      label={"Models"}
+      options={getOptionsFromData(modelFilterOptions, "model")}
+      onChange={(id, val) => setFilter(FilterTypes.model, val)}
+    />
     <DataTable data={data} isLoading={isLoading} context={DataContext.approved} />
   </Paper>)
 }

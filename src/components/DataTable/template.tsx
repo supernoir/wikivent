@@ -139,7 +139,6 @@ export const DataTable: React.FC<DataTableInterface> = ({ data, context, isLoadi
             data={data}
           />
       }
-
     </DataTableWrapper>
   )
 }
