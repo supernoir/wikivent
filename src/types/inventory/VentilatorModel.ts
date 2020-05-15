@@ -3,7 +3,7 @@ import { VentilatorApplicationType } from "./VentilatorTypes";
 export enum EntryStatus {
   approved = "approved",
   submitted = "submitted",
-  reported = "submitted"
+  reported = "reported"
 }
 
 export type EntryStatusType = EntryStatus.approved

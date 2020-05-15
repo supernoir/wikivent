@@ -48,7 +48,7 @@ export const VentilatorForm: React.FC<VentilatorFormProps> = (props) => {
       axios.post(
         `http://localhost:8081/submitted/new`, form
       ).then(result => {
-        if (result.status = 200) {
+        if (result.status === 200) {
           toast.success("New ventilator data submitted!")
           navigate(`/`)
         }
