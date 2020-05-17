@@ -12,12 +12,15 @@ const config = {
 }
 
 app.use(bodyParser())
+app.use(function (req, res) {
+	res.setHeader('Content-Type', 'application/json')
+})
 app.use(cors())
 app.use(createConnection)
 
 app.get("/", (req, res) => {
 	res.json({
-		message: "Welcome to the WIKIVENT api, please use the documentation to use the routes you need",
+		message: "Welcome to the WIKIVENT API, please use the documentation to use the routes you need",
 		version: apiVersion
 	})
 })
