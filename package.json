@@ -22,9 +22,12 @@
     "i18next": "^19.4.1",
     "i18next-browser-languagedetector": "^4.0.2",
     "i18next-xhr-backend": "^3.2.2",
+    "module-alias": "^2.2.2",
     "node-ts": "^5.0.5",
     "nodemon": "^2.0.2",
     "react": "^16.13.1",
+    "react-app-rewire-styled-components": "^3.0.2",
+    "react-app-rewired": "^2.1.6",
     "react-dom": "^16.13.1",
     "react-i18next": "^11.3.4",
     "react-scripts": "3.4.1",
@@ -36,10 +39,10 @@
     "typescript": "~3.7.2"
   },
   "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test",
-    "eject": "react-scripts eject",
+    "start": "react-app-rewired start",
+    "build": "react-app-rewired build",
+    "test": "react-app-rewired test",
+    "eject": "react-app-rewired eject",
     "start-server": "tsc && node api/index.ts"
   },
   "eslintConfig": {

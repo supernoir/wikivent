@@ -1,0 +1,12 @@
+version: "0.1"
+services:
+  api:
+    build: .
+    ports:
+      - "8081:8081"
+  web:
+    build: .
+    ports:
+      - "3000:3000"
+  db:
+    image: "rethinkdb"

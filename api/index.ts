@@ -1,5 +1,6 @@
 const express = require('express')
 const bodyParser = require('body-parser')
+const path = require("path")
 const app = express()
 const port = 8081 || process.env.port
 const cors = require("cors")
@@ -11,11 +12,17 @@ const config = {
 	db: 'inventory'
 }
 
+const moduleAlias = require('module-alias');
+
+moduleAlias.addAlias('styled-components', path.join(__dirname, '../node_modules/styled-components'));
+
 app.use(bodyParser())
 app.use(cors())
 app.use(createConnection)
+app.use(express.static(path.join(__dirname, '../build')));
 
-app.get("/", (req, res) => {
+
+app.get("/api", (req, res) => {
 	res.json({
 		message: "Welcome to the WIKIVENT api, please use the documentation to use the routes you need",
 		version: apiVersion
