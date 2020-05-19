@@ -1,5 +1,6 @@
 import styled from "styled-components"
 import { ReactComponent as LogoSVG } from "./../../public/images/wikivent_logo.svg"
+import { Header as GrommetHeader } from 'grommet'
 
 export const Name = styled.h1`
   text-transform: uppercase;
@@ -21,7 +22,7 @@ export const Logo = styled.div`
   flex-direction: row;
 `
 
-export const StyledHeader = styled.header`
+export const StyledHeader = styled(GrommetHeader)`
   width: 50em;
   display: flex;
   flex-direction: row;
