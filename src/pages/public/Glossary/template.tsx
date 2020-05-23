@@ -28,19 +28,20 @@ const glossary = [
 ]
 
 export const GlossaryPage: React.FC<GlossaryPageProps> = (props) => {
-  return (<Paper>
-    <Section>
-      <h1>{"Glossary"}</h1>
-      <GlossaryList>
-        {glossary.map(item => {
-          return <GlossaryListItem key={item.id}>
-            <Term>{item.term}</Term>
-            <Explanation>{item.explanation}</Explanation>
-            <Description>{item.desc}</Description>
-          </GlossaryListItem>
-        })}
-      </GlossaryList>
-    </Section>
-
-  </Paper>)
+  return (
+    <Paper>
+      <Section>
+        <h1>Glossary</h1>
+        <GlossaryList>
+          {glossary.map(item => {
+            return <GlossaryListItem key={item.id}>
+              <Term>{item.term}</Term>
+              <Explanation>{item.explanation}</Explanation>
+              <Description>{item.desc}</Description>
+            </GlossaryListItem>
+          })}
+        </GlossaryList>
+      </Section>
+    </Paper>
+  )
 }

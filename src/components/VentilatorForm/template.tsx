@@ -8,11 +8,14 @@ import {
   TextInput,
   TextArea,
   Label,
-  Divider
 } from '../FormComponents/styles';
 import { Select } from '../Select/template';
 import { toast } from "react-toastify";
-import { ventilatorTypeOptions, VentilatorFormModeType, DataContextType } from '../../types/inventory/VentilatorTypes';
+import {
+  ventilatorTypeOptions,
+  VentilatorFormModeType,
+  DataContextType
+} from '../../types/inventory/VentilatorTypes';
 
 interface VentilatorFormProps extends RouteComponentProps {
   mode: VentilatorFormModeType,
@@ -59,12 +62,11 @@ export const VentilatorForm: React.FC<VentilatorFormProps> = (props) => {
     }
   }
 
-  return (
+  const formComponents = (
     <Form>
       <FormComponent>
         <Select label={"Type of Ventilator"} id={"type"} options={ventilatorTypeOptions} onChange={handleSelect} />
       </FormComponent>
-      <Divider />
       <FormComponent>
         <Label>Make</Label>
         <TextInput id="make" type="text" placeholder={"Dräger"} onChange={handleInput} required />
@@ -81,7 +83,6 @@ export const VentilatorForm: React.FC<VentilatorFormProps> = (props) => {
         <Label>Link</Label>
         <TextInput id="link" type="text" placeholder="www.ventilator-producer.com" onChange={handleInput} />
       </FormComponent>
-      <Divider />
       <FormComponent>
         <Label>Series</Label>
         <TextInput id="series" type="text" placeholder={"Evita series"} onChange={handleInput} />
@@ -103,5 +104,10 @@ export const VentilatorForm: React.FC<VentilatorFormProps> = (props) => {
         <TextInput id="regNumber" type="text" onChange={handleInput} />
       </FormComponent>
       <Button type="submit" onClick={handleSubmit}>Submit</Button>
-    </Form>)
+    </Form>
+  );
+
+  return (
+    formComponents
+  )
 }

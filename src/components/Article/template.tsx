@@ -1,7 +1,7 @@
 import React from "react"
 import { Paper } from "../Paper"
 import { Section } from "../Section"
-import { Paragraph } from "grommet"
+import { Paragraph } from 'grommet'
 
 export interface ArticleProps {
   title: string,
@@ -13,12 +13,10 @@ export const Article: React.FC<ArticleProps> = ({ title, children }) => {
     <Paper>
       <Section>
         <h1>{title}</h1>
-        <Paragraph>
+        <Paragraph fill>
           {children}
         </Paragraph>
       </Section>
-
     </Paper>
   )
-
 }

@@ -3,12 +3,12 @@ import React, {
   useEffect
 } from 'react'
 import { RouteComponentProps } from '@reach/router'
+import axios from "axios"
+import { toast } from "react-toastify"
 import { DataTable } from '../../../components/DataTable/template'
 import { Paper } from '../../../components/Paper/styles'
-import axios from "axios"
 import { Select } from '../../../components/Select/template'
 import { ventilatorTypeOptions, DataContext } from '../../../types/inventory/VentilatorTypes'
-import { toast } from "react-toastify"
 import { FilterType, FilterTypes } from '../../../types/filter'
 import { appendFilterToUri } from '../../../services/QueryString'
 
@@ -59,6 +59,8 @@ export const HomePage: React.FC<HomePageProps> = () => {
 
     const query = appendFilterToUri({ type: typeFilter, make: makeFilter, model: modelFilter })
 
+    /* silencing error messages until API is implemented
+
     // Get All approved Items from API
     axios.get(
       `http://localhost:8081/approved/get${query}`,
@@ -80,6 +82,9 @@ export const HomePage: React.FC<HomePageProps> = () => {
       .catch(err => {
         toast.error(err.message)
       });
+
+    */
+
   }, [filterByMake, filterByModel, filterByType])
 
 
@@ -87,22 +92,24 @@ export const HomePage: React.FC<HomePageProps> = () => {
     setData(newData)
   }
 
-  return (<Paper>
-    <Select
-      label={"Type of Ventilator"}
-      options={ventilatorTypeOptions}
-      onChange={(id, val) => setFilter(FilterTypes.type, val)}
-    />
-    <Select
-      label={"Make"}
-      options={getOptionsFromData(makeFilterOptions, "make")}
-      onChange={(id, val) => setFilter(FilterTypes.make, val)}
-    />
-    <Select
-      label={"Models"}
-      options={getOptionsFromData(modelFilterOptions, "model")}
-      onChange={(id, val) => setFilter(FilterTypes.model, val)}
-    />
-    <DataTable data={data} isLoading={isLoading} context={DataContext.approved} />
-  </Paper>)
+  return (
+    <Paper>
+      <Select
+        label={"Type of Ventilator"}
+        options={ventilatorTypeOptions}
+        onChange={(id, val) => setFilter(FilterTypes.type, val)}
+      />
+      <Select
+        label={"Make"}
+        options={getOptionsFromData(makeFilterOptions, "make")}
+        onChange={(id, val) => setFilter(FilterTypes.make, val)}
+      />
+      <Select
+        label={"Models"}
+        options={getOptionsFromData(modelFilterOptions, "model")}
+        onChange={(id, val) => setFilter(FilterTypes.model, val)}
+      />
+      <DataTable data={data} isLoading={isLoading} context={DataContext.approved} />
+    </Paper>
+  )
 }

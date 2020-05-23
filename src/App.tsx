@@ -1,5 +1,5 @@
 import React, { Suspense } from 'react';
-import { StyledApp } from './styles';
+import { PageContainer, StyledApp } from './styles';
 import { Header } from './components/Header/template';
 import { Footer } from './components/Footer/template';
 import { Localization } from './components/Localization/template';
@@ -27,30 +27,31 @@ const LanguageContext = React.createContext(languages.en);
 export const App: React.FC = () => {
   return (
     <Grommet plain>
-
-      <StyledApp>
         <Suspense fallback={<Loader />}>
           <NetworkErrorBoundary>
             <LanguageContext.Provider value={languages.en}>
-              <ToastContainer />
-              <Header />
-              <Router>
-                {/** PUBLIC ROUTES */}
-                <HomePage path="/" />
-                <ItemDetailPage path="/vent/:id" />
-                <FormPage path="/form" />
-                <GlossaryPage path="/glossary" />
-                <AboutPage path="/about" />
-                <ItemDetailPage path="detail/:id" />
-                {/** RESTRICTED ROUTES */}
-                <ReviewPage path="/review" />
-              </Router>
-              <Footer />
-              <Localization />
+              <StyledApp>
+                <ToastContainer />
+                <Header />
+                <PageContainer>
+                  <Router>
+                    {/** PUBLIC ROUTES */}
+                    <HomePage path="/" />
+                    <ItemDetailPage path="/vent/:id" />
+                    <FormPage path="/form" />
+                    <GlossaryPage path="/glossary" />
+                    <AboutPage path="/about" />
+                    <ItemDetailPage path="detail/:id" />
+                    {/** RESTRICTED ROUTES */}
+                    <ReviewPage path="/review" />
+                  </Router>
+                </PageContainer>
+                <Footer />
+                <Localization />
+              </StyledApp>
             </LanguageContext.Provider>
           </NetworkErrorBoundary>
         </Suspense>
-      </StyledApp>
     </Grommet>
   );
 }

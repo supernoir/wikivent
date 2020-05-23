@@ -5,7 +5,7 @@ import { Article } from '../../../components/Article'
 interface AboutPageProps extends RouteComponentProps { }
 
 export const AboutPage: React.FC<AboutPageProps> = (props) => {
-  return (<>
+  return (
     <Article
       title={"About the project"}>
       On March 22, 2020 in the midst of a global pandemic, a doctor wrote a New York Times OpEd with a simple request:
@@ -13,6 +13,6 @@ export const AboutPage: React.FC<AboutPageProps> = (props) => {
       We are a group of volunteers here to answer the call to action. We built this platform with the mission to:
       provide an aggregated overview of critical ventilator demand.
       connect medical facilities with verified ventilator suppliers.
-        </Article>
-  </>)
+    </Article>
+  )
 }

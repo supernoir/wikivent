@@ -1,7 +1,7 @@
 import React from 'react'
 import { StyledNavigationList, StyledNavigationListItem, StyledLink } from './styles'
 import { useTranslation } from 'react-i18next';
-import { Menu, Nav, ResponsiveContext } from "grommet";
+import { Box, Menu, Nav, ResponsiveContext } from "grommet";
 import { navigate } from "@reach/router";
 
 type MenuItem = {
@@ -40,8 +40,15 @@ export const Navigation: React.FC = () => {
     <ResponsiveContext.Consumer>
       {size =>
         size === "small" ? (
+          <Box
+            align="end"
+            pad="medium"
+            round="small"
+            background="snow"
+          >
           <Menu
             label="Menu"
+            dropBackground="snow"
             items={menuitems.map((item: MenuItem) => {
               return {
                 label: t(item.label),
@@ -51,6 +58,7 @@ export const Navigation: React.FC = () => {
               };
             })}
           />
+          </Box>
         ) : (
           <Nav direction="row">
             <StyledNavigationList>
