@@ -6,7 +6,8 @@ import { Localization } from './components/Localization/template';
 import { Router } from '@reach/router';
 import { HomePage } from './pages/public/Home/template'
 import { FormPage } from './pages/public/Submission/template'
-import { AboutPage } from './pages/public/About/template'
+import { AboutPage } from './pages/public/Articles/About/template'
+import { VerificationProcessPage } from './pages/public/Articles/VerificationProcess/template'
 import { GlossaryPage } from './pages/public/Glossary/template'
 import { ItemDetailPage } from './pages/public/DetailPage/template';
 import { ReviewPage } from './pages/restricted/Review/template'
@@ -15,6 +16,7 @@ import 'react-toastify/dist/ReactToastify.css';
 import { Loader } from './components/Loader/template'
 import { NetworkErrorBoundary } from 'rest-hooks';
 import { Grommet } from 'grommet';
+import { ApiDocsPage } from './pages/public/Articles/ApiDocs/template';
 
 const languages = {
   en: "en",
@@ -40,8 +42,11 @@ export const App: React.FC = () => {
                 <ItemDetailPage path="/vent/:id" />
                 <FormPage path="/form" />
                 <GlossaryPage path="/glossary" />
-                <AboutPage path="/about" />
                 <ItemDetailPage path="detail/:id" />
+                {/** ARTICLES */}
+                <AboutPage path="/about" />
+                <VerificationProcessPage path="/verification" />
+                <ApiDocsPage path="/api" />
                 {/** RESTRICTED ROUTES */}
                 <ReviewPage path="/review" />
               </Router>

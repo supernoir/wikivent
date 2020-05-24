@@ -1,56 +1,45 @@
-import React, { useEffect, useState } from 'react'
-import { RouteComponentProps, Link } from '@reach/router'
+import React from 'react'
+import { RouteComponentProps } from '@reach/router'
 import { Paper } from '../../../components/Paper'
 import { Section } from '../../../components/Section'
-import axios from "axios"
 import { ExternalLink } from '../../../components/ExternalLink'
 import { Model, Make, Head, FeatureList, FeatureListItem } from './styles'
 import { BackLink } from '../../../components/BackLink/styles'
 import { Segment } from '../../../components/Segment/styles'
+import VentilatorResource from '../../../resources/VentilatorResource'
+import { useResource } from 'rest-hooks'
 
 interface ItemDetailPageProps extends RouteComponentProps {
   id?: string
 }
 
 export const ItemDetailPage: React.FC<ItemDetailPageProps> = ({ id }) => {
-
-  const [data, setData] = useState([])
-
-  useEffect(() => {
-    axios.get(
-      `http://localhost:8081/approved/get/${id}`,
-    ).then(result => setApprovedItems([result.data]));
-  }, [])
-
-
-  function setApprovedItems(newData: any) {
-    setData(newData)
-  }
+  const ventilator = useResource(
+    VentilatorResource.detailShape(),
+    { id }
+  );
 
   return (<Paper>
     <Section>
       <Segment>
-        <BackLink to={"/"}>{"Back to Overview"}</BackLink>
+        <BackLink to={"/"}>{"I18N Back to Overview"}</BackLink>
       </Segment>
-      {data && data.map((detail: any) => {
-        return (<>
-          <Segment>
-            <Head>
-              <Make>{detail.make}</Make>
-              <Model>{detail.model}</Model>
-            </Head>
-            <FeatureList>
-              {detail.features && detail.features.map((feature: any) => {
-                return <FeatureListItem>{feature}</FeatureListItem>
-              })}
-            </FeatureList>
-          </Segment>
-          <Segment>
-            <ExternalLink link={detail.link} label={"Product page"} />
-          </Segment>
-        </>
-        )
-      })}
+
+      <Segment>
+        <Head>
+          <Make>{ventilator.make}</Make>
+          <Model>{ventilator.model}</Model>
+        </Head>
+        <FeatureList>
+          {ventilator.features && ventilator.features.map((feature: any) => {
+            return <FeatureListItem>{feature}</FeatureListItem>
+          })}
+        </FeatureList>
+      </Segment>
+
+      <Segment>
+        <ExternalLink link={ventilator.link} label={"I18N Product page"} />
+      </Segment>
     </Section>
 
   </Paper>)
