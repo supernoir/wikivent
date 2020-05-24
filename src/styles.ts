@@ -1,4 +1,5 @@
 import styled, { createGlobalStyle } from "styled-components"
+import { Box, Main } from "grommet"
 
 export const GlobalStyle = createGlobalStyle`
 @import url('https://fonts.googleapis.com/css?family=Source+Sans+Pro&display=swap');
@@ -12,8 +13,7 @@ export const GlobalStyle = createGlobalStyle`
   }
 `
 
-
-export const StyledApp = styled.main`
+export const StyledApp = styled(Main)`
   margin: 0;
   padding: 0;
   height: 100%;
@@ -21,5 +21,17 @@ export const StyledApp = styled.main`
   flex-direction: column;
   flex-wrap: nowrap;
   justify-content: center;
-  align-items: center;
+  align-items: safe center;
+`
+
+export const PageContainer = styled(Box)`
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  justify-content: center;
+  align-items: safe start;
+  overflow: auto;
 `
