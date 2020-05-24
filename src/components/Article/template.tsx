@@ -1,7 +1,7 @@
 import React from "react"
 import { Paper } from "../Paper"
 import { Section } from "../Section"
-import { Paragraph } from 'grommet'
+import { Paragraph } from "grommet"
 
 export interface ArticleProps {
   title: string,

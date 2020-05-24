@@ -1,8 +1,8 @@
 import React from 'react'
 import { StyledNavigationList, StyledNavigationListItem, StyledLink } from './styles'
 import { useTranslation } from 'react-i18next';
-import { Box, Menu, Nav, ResponsiveContext } from "grommet";
-import { navigate } from "@reach/router";
+import { Box, Menu, Nav, ResponsiveContext } from 'grommet';
+import { navigate } from '@reach/router';
 
 type MenuItem = {
   id: number;

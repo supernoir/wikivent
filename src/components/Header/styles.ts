@@ -1,6 +1,6 @@
 import styled from "styled-components"
 import { ReactComponent as LogoSVG } from "./../../public/images/wikivent_logo.svg"
-import { Header as GrommetHeader } from 'grommet'
+import { Header as GrommetHeader } from "grommet"
 
 export const Name = styled.h1`
   text-transform: uppercase;
