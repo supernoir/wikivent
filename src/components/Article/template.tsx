@@ -17,7 +17,6 @@ export const Article: React.FC<ArticleProps> = ({ title, children }) => {
           {children}
         </Paragraph>
       </Section>
-
     </Paper>
   )
 

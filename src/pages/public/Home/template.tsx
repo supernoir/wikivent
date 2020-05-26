@@ -11,10 +11,15 @@ import { ventilatorTypeOptions, DataContext } from '../../../types/inventory/Ven
 import { toast } from "react-toastify"
 import { FilterType, FilterTypes } from '../../../types/filter'
 import { appendFilterToUri } from '../../../services/QueryString'
+import { useResource } from 'rest-hooks'
+import VentilatorResource from '../../../resources/VentilatorResource'
 
 interface HomePageProps extends RouteComponentProps { }
 
 export const HomePage: React.FC<HomePageProps> = () => {
+  const ventilators = useResource(
+    VentilatorResource.listShape(), {}
+  );
   const [data, setData] = useState([])
   const [isLoading, setIsLoading] = useState(false)
   const [filterByType, setFilterbyType] = useState("")
@@ -103,6 +108,6 @@ export const HomePage: React.FC<HomePageProps> = () => {
       options={getOptionsFromData(modelFilterOptions, "model")}
       onChange={(id, val) => setFilter(FilterTypes.model, val)}
     />
-    <DataTable data={data} isLoading={isLoading} context={DataContext.approved} />
+    <DataTable data={ventilators} isLoading={isLoading} context={DataContext.approved} />
   </Paper>)
 }
