@@ -1,12 +1,11 @@
-version: "0.1"
+version: "3.8"
 services:
   api:
     build: .
     ports:
       - "8081:8081"
-  web:
-    build: .
-    ports:
-      - "3000:3000"
   db:
     image: "rethinkdb"
+    ports:
+      - "28015"
+    command: rethinkdb --bind all

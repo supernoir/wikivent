@@ -2,7 +2,7 @@ const express = require('express')
 const bodyParser = require('body-parser')
 const path = require("path")
 const app = express()
-const port = 8081 || process.env.port
+const port = 8081 || process.env.PORT
 const cors = require("cors")
 const rdb = require('rethinkdb')
 const apiVersion = 1;
@@ -233,4 +233,4 @@ function closeConnection(req, res, next) {
 
 
 app.listen(port)
-console.log('Listening on port ' + port)
+console.log('WikiVent API running \nPort: ' + port)
