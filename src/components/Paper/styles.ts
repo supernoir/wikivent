@@ -1,7 +1,7 @@
 import styled from "styled-components"
 
 export const Paper = styled.main`
-  background: snow;
+  background: white;
   padding: 1em;
   margin: 0;
   border: 0;
