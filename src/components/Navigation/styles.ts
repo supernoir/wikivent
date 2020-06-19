@@ -9,10 +9,10 @@ export const StyledNavigationList = styled.ul`
 `
 
 export const StyledNavigationListItem = styled.li`
-margin: 0 10px 0 0;
-:last-child {
-  margin: 0;
-}
+  margin: 0 10px 0 0;
+  :last-child {
+    margin: 0;
+  }
 `
 
 export const StyledLink = styled(Link)`

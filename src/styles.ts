@@ -2,7 +2,6 @@ import styled, { createGlobalStyle } from "styled-components"
 import { Box, Main } from "grommet"
 
 export const GlobalStyle = createGlobalStyle`
-@import url('https://fonts.googleapis.com/css?family=Source+Sans+Pro&display=swap');
   html, body, #root, .App {
   min-height: 100vh;
   font-family: 'Source Sans Pro', sans-serif;

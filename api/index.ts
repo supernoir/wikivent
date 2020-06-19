@@ -1,7 +1,8 @@
 const express = require('express')
 const bodyParser = require('body-parser')
+const path = require("path")
 const app = express()
-const port = 8081 || process.env.port
+const port = 8081 || process.env.PORT
 const cors = require("cors")
 const rdb = require('rethinkdb')
 const apiVersion = 1;
@@ -11,12 +12,15 @@ const config = {
 	db: 'inventory'
 }
 
+const moduleAlias = require('module-alias');
+moduleAlias.addAlias('styled-components', path.join(__dirname, '../node_modules/styled-components'));
+
 app.use(bodyParser())
-app.use(function (req, res) {
-	res.setHeader('Content-Type', 'application/json')
-})
+
 app.use(cors())
 app.use(createConnection)
+
+app.use(express.static(path.join(__dirname, '../build')));
 
 app.get("/", (req, res) => {
 	res.json({
@@ -229,4 +233,4 @@ function closeConnection(req, res, next) {
 
 
 app.listen(port)
-console.log('Listening on port ' + port)
+console.log('WikiVent API running \nPort: ' + port)

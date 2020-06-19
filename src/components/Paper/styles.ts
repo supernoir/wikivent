@@ -2,7 +2,7 @@ import styled from "styled-components"
 import { Box } from "grommet"
 
 export const Paper = styled(Box)`
-  background: snow;
+  background: white;
   padding: 1em;
   margin: 0;
   border: 0;
