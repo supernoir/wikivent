@@ -1,6 +1,7 @@
 import styled from "styled-components"
+import { Box } from "grommet"
 
-export const Paper = styled.main`
+export const Paper = styled(Box)`
   background: white;
   padding: 1em;
   margin: 0;

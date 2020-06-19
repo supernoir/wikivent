@@ -3,12 +3,12 @@ import React, {
   useEffect
 } from 'react'
 import { RouteComponentProps } from '@reach/router'
+import axios from "axios"
+import { toast } from "react-toastify"
 import { DataTable } from '../../../components/DataTable/template'
 import { Paper } from '../../../components/Paper/styles'
-import axios from "axios"
 import { Select } from '../../../components/Select/template'
 import { ventilatorTypeOptions, DataContext } from '../../../types/inventory/VentilatorTypes'
-import { toast } from "react-toastify"
 import { FilterType, FilterTypes } from '../../../types/filter'
 import { appendFilterToUri } from '../../../services/QueryString'
 import { useResource } from 'rest-hooks'
@@ -64,6 +64,8 @@ export const HomePage: React.FC<HomePageProps> = () => {
 
     const query = appendFilterToUri({ type: typeFilter, make: makeFilter, model: modelFilter })
 
+    /* silencing error messages until API is implemented
+
     // Get All approved Items from API
     axios.get(
       `http://localhost:8081/approved/get${query}`,
@@ -85,6 +87,9 @@ export const HomePage: React.FC<HomePageProps> = () => {
       .catch(err => {
         toast.error(err.message)
       });
+
+    */
+
   }, [filterByMake, filterByModel, filterByType])
 
 

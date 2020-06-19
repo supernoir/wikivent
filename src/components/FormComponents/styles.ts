@@ -1,19 +1,25 @@
 import styled from "styled-components"
+import {
+  Form as GrommetForm,
+  FormField as GrommetFormField,
+  TextArea as GrommetTextArea,
+  TextInput as GrommetTextInput
+} from "grommet"
 
-export const Form = styled.form`
+export const Form = styled(GrommetForm)`
   display: flex;
   flex-direction: column;
   margin: 0;
 `
 
-export const FormComponent = styled.div`
+export const FormComponent = styled(GrommetFormField)`
   display:flex;
   flex-direction: column;
   flex-grow: 1;
   margin: 0;
 `
 
-export const TextInput = styled.input`
+export const TextInput = styled(GrommetTextInput)`
   font-family: "Source Sans Pro", sans-serif;
   padding: 0.5em;
   color: black;
@@ -30,7 +36,7 @@ export const TextInput = styled.input`
   }
 `
 
-export const TextArea = styled.textarea`
+export const TextArea = styled(GrommetTextArea)`
   font-family: "Source Sans Pro", sans-serif;
   padding: 0.5em;
   color: black;

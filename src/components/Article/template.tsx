@@ -13,11 +13,10 @@ export const Article: React.FC<ArticleProps> = ({ title, children }) => {
     <Paper>
       <Section>
         <h1>{title}</h1>
-        <Paragraph>
+        <Paragraph fill>
           {children}
         </Paragraph>
       </Section>
     </Paper>
   )
-
 }
