@@ -27,7 +27,7 @@
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
     "react-i18next": "^11.3.4",
-    "react-scripts": "3.4.1",
+    "react-scripts": "5.0.1",
     "react-table": "^7.0.0",
     "react-toastify": "^5.5.0",
     "rest-hooks": "^4.5.9",
